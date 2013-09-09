@@ -1,0 +1,67 @@
+<!-- Load editor widget code! -->
+<script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
+
+
+<!-- Instantiate Feather -->
+<script type='text/javascript'>
+   var featherEditor = new Aviary.Feather({
+       apiKey: '<%= ENV['AVIARY_KEY'] %>',
+       apiVersion: 3,
+       theme: 'dark', // Check out our new 'light' and 'dark' themes!
+       tools: 'enhance,effects,crop,resize,orientation,focus,brightness,contrast,saturation,warmth,sharpness,colorsplash,redeye,whiten,blemish',
+       appendTo: '',
+       onSave: function(imageID, newURL) {
+           var img = document.getElementById(imageID);
+           img.src = newURL;
+		   var formImg = $("#submit_img");
+		   formImg.attr('value', newURL);
+		   console.log(newURL);
+       },
+       onError: function(errorObj) {
+           alert(errorObj.message);
+       }
+   });
+   function launchEditor(id, src) {
+       featherEditor.launch({
+           image: id,
+           url: src
+       });
+      return false;
+   }
+</script>
+
+
+
+<%= form_for @photo do |f| %>
+	<div id="uploaderDiv">
+	<%= f.label :filepicker_url, "Upload Your Picture: " %>
+	<%= f.filepicker_field :url, dragdrop: true, mimetypes: 'image/*', onchange: 'uploaded(event)' %>
+	<!-- <input type="hidden" id="photo_url" name:"photo[url]" value=""> -->
+	</div>
+<% end %>
+
+<br>
+<div id="editorDiv" class="hidden" >
+	<img id="imgPreview" src="" width="350">
+	<br>
+	<a href="#" onclick="return launchEditor('imgPreview', previewUrl());">Edit Photo!</a>
+	<form action="<%= photos_url %>" method="POST">
+		<input type="hidden" name="photo[url]" id="submit_img" value="asdf">
+		<input type="hidden" name="photo[user_id]" value="<%=1%>">
+		<input type="submit" value="Upload Picture" onclick="console.log('click')">
+	</form>
+</div>
+
+
+
+<script>
+uploaded = function(event){	
+	var uploadDiv = $('#uploaderDiv').addClass('hidden');
+	var editDiv = $('#editorDiv').removeClass('hidden');
+	var imagePreview = $('#imgPreview').attr('src', event.fpfile.url);
+}
+
+previewUrl = function(){
+	return $('#imgPreview').attr('src');
+}
+</script>
