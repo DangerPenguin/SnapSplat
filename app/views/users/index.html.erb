@@ -1,0 +1,8 @@
+<h1>Users: </h1>
+
+<ul>
+<% @users.each do |user| %>
+	<% next if(user.id == current_user.id)%>
+	<li><a href="<%= user_url(user) %>"><%=user.username%></a></li>
+<% end %>
+</ul>

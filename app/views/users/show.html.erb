@@ -11,5 +11,15 @@
 <br>
 
 <h4>Photos: </h4>
+<ul>
+	<% @user.photos.each do |photo| %>
+	<li> <img src="<%= photo.url %>" width="400" onclick='$.modal( createModal( "<%= photo.url %>" ), { "overlayClose": true } );'> </li>	
+	<% end %>
+</ul>
 
-<br>
+<script type="text/javascript">
+
+function createModal (url) {
+	return "<div><img src='" + url + "' width='700' ></div>";
+}
+</script>

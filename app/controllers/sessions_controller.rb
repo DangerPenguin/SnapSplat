@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       render :new
     else
       self.current_user = user
-      redirect_to user_url(user)
+      redirect_to user_home_url(user)
       #render :json => "CREATE PAGE".to_json
     end
   end
