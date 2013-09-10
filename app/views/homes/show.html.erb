@@ -1,3 +1,13 @@
 <h1>Welcome, good friend <%= current_user.username %></h1>
 
 <h3>Feed:</h3>
+<div id="user_feed">
+	<ul>
+		<% current_user.get_limited_feed_photos.each do |photo| %>
+		<li> 
+			<h4><%= photo.user.username %>:</h4>
+			<img src="<%= photo.url %>" width="400"> 
+		</li>
+		<% end %>
+	</ul>
+</div>

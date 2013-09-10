@@ -2,6 +2,15 @@
 
 <br>
 
+<% if(current_user.id != @user.id) %>
+	<% if(current_user.following.include?(@user)) %>
+		<button id="unfollowButton" onclick='unfollow("<%= current_user.id %>", 
+				"<%= current_user.following_join.where({:following_id => @user.id}).first().id%>")'>UNFOLLOW</button>
+	<% else %>
+		<button id="followButton" onclick='follow("<%= current_user.id %>", "<%= @user.id %>")'>FOLLOW</button>
+	<% end  %>
+	<br>
+<% end %>
 <h4>Tagline: </h4>
 
 <br>
@@ -21,5 +30,42 @@
 
 function createModal (url) {
 	return "<div><img src='" + url + "' width='700' ></div>";
+}
+
+function follow(user_id, id){
+	$.ajax({
+		url: "/users/" + user_id + "/follows/",
+		type: "POST",
+		data: {
+			'follow': {
+				'follower_id': user_id,
+				'following_id': id	
+			}
+		},
+		success: function(responseData){
+			console.log("Success following!");
+			console.log(responseData);
+		},
+		failure: function(responsoData){
+			console.log("Failure following!");
+			console.log(responseData);
+		}
+	});
+}
+
+
+function unfollow(user_id, id){
+	$.ajax({
+		url: "/users/" + user_id + "/follows/" + id,
+		type: "DELETE",
+		success: function(responseData){
+			console.log("Success unfollowing!");
+			console.log(responseData);
+		},
+		failure: function(responsoData){
+			console.log("Failure unfollowing!");
+			console.log(responseData);
+		}
+	});
 }
 </script>

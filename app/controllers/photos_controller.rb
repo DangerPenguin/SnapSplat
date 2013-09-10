@@ -11,9 +11,9 @@ class PhotosController < ApplicationController
     @photo = Photo.new( params[:photo] )
     
     if @photo && @photo.save
-      redirect_to photos_url
+      redirect_to user_photos_url(current_user)
     else
-      redirect_to new_photo_url
+      redirect_to new_user_photo_url(current_user)
     end
   end
   

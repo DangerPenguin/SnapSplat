@@ -8,11 +8,37 @@ class User < ActiveRecord::Base
   validates :username, :presence => true
   
   after_initialize :ensure_session_token
-  
+ 
+ #photos 
   has_many(:photos,
   :class_name => "Photo",
   :primary_key => :id,
   :foreign_key => :user_id)
+  
+  has_many(:feed_photos,
+  :through => :following,
+  :source => :photos)
+  
+  #users this one is following
+  has_many(:following_join,
+  :class_name => "Follow",
+  :primary_key => :id,
+  :foreign_key => :follower_id)
+  
+  has_many(:following,
+  :through => :following_join,
+  :source => :following)
+  
+  
+  #users following this one
+  has_many(:follower_join,
+  :class_name => "Follow",
+  :primary_key => :id,
+  :foreign_key => :following_id)
+  
+  has_many(:followers,
+  :through => :follower_join,
+  :source => :follower)
   
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)
@@ -24,6 +50,14 @@ class User < ActiveRecord::Base
   
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
+  end
+  
+  def get_limited_feed_photos(feed_limit = 10)
+    self.feed_photos.order('created_at DESC').limit(feed_limit);
+  end
+  
+  def get_sorted_photos()
+    self.photos.order('created_at DESC')
   end
   
   def is_password?(password)

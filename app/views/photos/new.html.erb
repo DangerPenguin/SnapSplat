@@ -32,7 +32,7 @@
 
 
 
-<%= form_for @photo do |f| %>
+<%= form_for user_photos_url(current_user) do |f| %>
 	<div id="uploaderDiv">
 	<%= f.label :filepicker_url, "Upload Your Picture: " %>
 	<%= f.filepicker_field :url, dragdrop: true, mimetypes: 'image/*', onchange: 'uploaded(event)' %>
@@ -45,9 +45,9 @@
 	<img id="imgPreview" src="" width="350">
 	<br>
 	<a href="#" onclick="return launchEditor('imgPreview', previewUrl());">Edit Photo!</a>
-	<form action="<%= photos_url %>" method="POST">
+	<form action="<%= user_photos_url(current_user) %>" method="POST">
 		<input type="hidden" name="photo[url]" id="submit_img" value="asdf">
-		<input type="hidden" name="photo[user_id]" value="<%=1%>">
+		<input type="hidden" name="photo[user_id]" value="<%=current_user.id%>">
 		<input type="submit" value="Upload Picture" onclick="console.log('click')">
 	</form>
 </div>

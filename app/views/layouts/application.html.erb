@@ -17,7 +17,7 @@
 	<li style="display: inline;"><a href="<%= user_home_url(current_user) %>">HOME</a></li>
 	<li style="display: inline;"><a href="<%= user_url(current_user.id)%>">PROFILE</a></li>
 	<li style="display: inline;"><a href="<%= users_url %>">EXPLORE</a></li>
-	<li style="display: inline;"><a href="#/upload_photo">UPLOAD SNAP</a></li>
+	<li style="display: inline;"><a href="<%= new_user_photo_url(current_user) %>">UPLOAD SNAP</a></li>
   </ul>
 <% end %>
 
