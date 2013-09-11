@@ -7,18 +7,31 @@
   <%= filepicker_js_include_tag %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class='container-fluid'>
 	
 <!-- Nav Bar setup -->	
 <% if !current_user.nil? %>
-  <ul>
-    <li style="display: inline;">Logged in as: <%= current_user.username %></li>
-    <li style="display: inline-block;"><%= button_to "Logout", session_url, :method => :delete %></li>
-	<li style="display: inline;"><a href="<%= user_home_url(current_user) %>">HOME</a></li>
-	<li style="display: inline;"><a href="<%= user_url(current_user.id)%>">PROFILE</a></li>
-	<li style="display: inline;"><a href="<%= users_url %>">EXPLORE</a></li>
-	<li style="display: inline;"><a href="<%= new_user_photo_url(current_user) %>">UPLOAD SNAP</a></li>
-  </ul>
+
+<!-- User bar -->
+<div class="row">
+	<div class="span4" style="float: none; margin:0 auto;">
+		<div class="span2">Logged in as: <%= current_user.username %></div>
+		<div class="span1"><%= button_to "Logout", session_url, :method => :delete %></div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="span5" style="float: none; margin:0 auto;">
+		<div class="span1"><a href="<%= user_home_url(current_user) %>">HOME</a></div>
+		<div class="span1"><a href="<%= user_url(current_user.id)%>">PROFILE</a></div>
+		<div class="span1"><a href="<%= users_url %>">EXPLORE</a></div>
+		<div class="span1"><a href="<%= new_user_photo_url(current_user) %>">UPLOAD</a></div>
+
+	</div>
+</div>
+
+
 <% end %>
 
 <!-- Error/Notices flash -->
@@ -31,7 +44,11 @@
 <% end %>
 
 <!-- Load current page -->
-<%= yield %>
+<div class="row">
+	<div class="span5" style="float: none; margin:0 auto;">
+	<%= yield %>
+	</div>
+</div>
 
 </body>
 </html>

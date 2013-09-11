@@ -1,6 +1,27 @@
-<h1>Welcome, good friend <%= current_user.username %></h1>
+<!-- welcome bar -->
+<div class="row">
+	<div class="span5" style="float: none; margin:0 auto;">
+		<div class="span5"> <h1>Welcome, <%= current_user.username %></h1> </div>
+	</div>
+</div>
 
-<h3>Feed:</h3>
+<!-- feed bar -->
+<div class="row">
+	<div class="span2" style="float: none; margin:0 auto;">
+		<div class="span2"> <h3>Feed:</h3> </div>
+	</div>
+</div>
+
+<!-- feed item -->
+<div class="row">
+	<div class="span2" style="float: none; margin:0 auto;">
+		<div class="span2"> <h3>Feed:</h3> </div>
+	</div>
+</div>
+
+
+
+
 <div id="user_feed">
 	<ul>
 		<% current_user.get_limited_feed_photos.each do |photo| %>
