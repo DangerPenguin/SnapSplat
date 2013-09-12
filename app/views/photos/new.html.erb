@@ -31,15 +31,14 @@
    }
 </script>
 
-
-
 <div class="pagebox">
 
 	<div id="photo_new_div">
 		<div class="inputbox">
+			<h1>Upload a Photo: </h1>
 			<%= form_for user_photos_url(current_user) do |f| %>
 				<div id="uploaderDiv">
-				<%= f.label :filepicker_url, "Upload Your Picture: " %>
+					<br>
 				<%= f.filepicker_field :url, dragdrop: true, mimetypes: 'image/*', onchange: 'uploaded(event)' %>
 				<!-- <input type="hidden" id="photo_url" name:"photo[url]" value=""> -->
 				</div>
@@ -67,13 +66,6 @@
 	
 	</div>
 </div>
-
-
-
-
-
-
-
 
 
 <script>

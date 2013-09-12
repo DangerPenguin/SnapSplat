@@ -17,7 +17,12 @@
 	<div class="inner-center">
 		<div class="inputbox">
 			Logged in as: <%= current_user.username %>
-			<%= button_to "Logout", session_url, :method => :delete %>
+						
+			<form action="http://localhost:3000/session" class="button_to" method="post" style="display: inline;">
+					<input name="_method" type="hidden" value="delete">
+					<input style="display:inline;" type="submit" value="Logout">
+					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+			</form>
 		</div>
 	</div>
 </div>
@@ -39,8 +44,6 @@
 
 	</div>
 </div>
-
-
 <% end %>
 
 <!-- Error/Notices flash -->

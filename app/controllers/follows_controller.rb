@@ -7,9 +7,9 @@ class FollowsController < ApplicationController
     puts params
     
     if @follow && @follow.save
-      render :json => "Success".to_json
+      render :json => @follow
     else
-      render :json => "Failure"
+      render :json => "Failure".to_json
     end
   end
   
@@ -17,9 +17,9 @@ class FollowsController < ApplicationController
     @follow = Follow.find_by_id(params[:id])
     
     if @follow && @follow.destroy
-      render :json => "Success".to_json;
+      render :json => @follow
     else
-      render :json => "Failure".to_json;
+      render :json => "Failure".to_json
     end
   end
   
