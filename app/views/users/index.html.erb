@@ -1,8 +1,22 @@
-<h1>Users: </h1>
 
-<ul>
-<% @users.each do |user| %>
-	<% next if(user.id == current_user.id)%>
-	<li><a href="<%= user_url(user) %>"><%=user.username%></a></li>
-<% end %>
-</ul>
+<div class="pagebox">
+
+	<div id="users" >		
+		<div class="inputbox">
+			<h1>Users: </h1>
+		</div>
+		
+		<br>
+		
+		<% @users.each do |user| %>
+			<% next if(user.id == current_user.id)%>
+			<div class="inputbox" style="display: inline">
+				<a href="<%= user_url(user) %>"><%=user.username%></a>
+				<img src="">
+			</div>
+			
+			&nbsp
+			
+		<% end %>
+	</div>
+</div>

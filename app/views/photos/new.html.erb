@@ -33,26 +33,46 @@
 
 
 
-<%= form_for user_photos_url(current_user) do |f| %>
-	<div id="uploaderDiv">
-	<%= f.label :filepicker_url, "Upload Your Picture: " %>
-	<%= f.filepicker_field :url, dragdrop: true, mimetypes: 'image/*', onchange: 'uploaded(event)' %>
-	<!-- <input type="hidden" id="photo_url" name:"photo[url]" value=""> -->
-	</div>
-<% end %>
+<div class="pagebox">
 
-<br>
-<div id="editorDiv" class="hidden" >
-	<img id="imgPreview" src="" width="350">
-	<br>
-	<a href="#" onclick="return launchEditor('imgPreview', previewUrl());">Edit Photo!</a>
-	<form action="<%= user_photos_url(current_user) %>" method="POST">
-		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-		<input type="hidden" name="photo[url]" id="submit_img" value="asdf">
-		<input type="hidden" name="photo[user_id]" value="<%=current_user.id%>">
-		<input type="submit" value="Upload Picture">
-	</form>
+	<div id="photo_new_div">
+		<div class="inputbox">
+			<%= form_for user_photos_url(current_user) do |f| %>
+				<div id="uploaderDiv">
+				<%= f.label :filepicker_url, "Upload Your Picture: " %>
+				<%= f.filepicker_field :url, dragdrop: true, mimetypes: 'image/*', onchange: 'uploaded(event)' %>
+				<!-- <input type="hidden" id="photo_url" name:"photo[url]" value=""> -->
+				</div>
+			<% end %>
+			
+			<br>
+			<div id="editorDiv" class="hidden" >
+				<img id="imgPreview" src="" width="350">
+				<br>
+				<br>
+				<a href="#" onclick="return launchEditor('imgPreview', previewUrl());">
+					<button  >Edit Photo!</button></a>
+					
+					&nbsp
+				<form action="<%= user_photos_url(current_user) %>" method="POST" style="display: inline;" >
+					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+					<input type="hidden" name="photo[url]" id="submit_img" value="asdf">
+					<input type="hidden" name="photo[user_id]" value="<%=current_user.id%>">
+					<input type="submit" value="Upload Picture">
+				</form>
+				<br>
+			</div>
+			
+		</div>
+	
+	</div>
 </div>
+
+
+
+
+
+
 
 
 

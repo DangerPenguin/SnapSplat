@@ -23,6 +23,8 @@
 
 .hidden { display: none; }
 
+html, body, {height: 100%;}
+
 .outer-center{
 	float: right;
 	right: 50%;
@@ -48,6 +50,5 @@
 .pagebox{
 	background-color: #bdc3c7;
 	text-align: center;
-	height: 100%;
 	padding: 20px;
 }
