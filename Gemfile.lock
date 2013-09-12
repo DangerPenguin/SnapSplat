@@ -63,6 +63,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.25)
     multi_json (1.7.9)
+    newrelic_rpm (3.6.7.152)
     pg (0.16.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -127,6 +128,7 @@ DEPENDENCIES
   figaro
   filepicker-rails
   jquery-rails
+  newrelic_rpm
   pg
   pry-rails
   rails (= 3.2.13)
