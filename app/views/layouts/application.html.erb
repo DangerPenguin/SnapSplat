@@ -18,7 +18,7 @@
 		<div class="inputbox">
 			Logged in as: <%= current_user.username %>
 						
-			<form action="http://localhost:3000/session" class="button_to" method="post" style="display: inline;">
+			<form action="<%= session_url %>" class="button_to" method="post" style="display: inline;">
 					<input name="_method" type="hidden" value="delete">
 					<input style="display:inline;" type="submit" value="Logout">
 					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">

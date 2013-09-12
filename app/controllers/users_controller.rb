@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_current_user!, :only => [:show, :index]
+  before_filter :require_current_user!, :only => [:show, :index, :edit]
   before_filter :require_no_current_user!, :only => [:create, :new]
   
   def create
@@ -28,4 +28,13 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+  
+  def edit
+    redirect_to user_url(params[:id]) unless current_user.id == user_id 
+  end
+  
+  def update
+    @user = User.find_by_id(params[:id])
+  end
+  
 end

@@ -1,7 +1,15 @@
 <div class="pagebox">
+	<div id="banner" class="inputbox">
+		<h1>New Snaps:</h1>
+	</div>
+	
+	<br>
+
 
 	<div id="user_feed">
-		<% current_user.get_limited_feed_photos.each do |photo| %>
+		<% photos =  current_user.get_limited_feed_photos %>
+		
+		<% photos.each do |photo| %>
 			<div class="inputbox">
 				<h4><%= photo.user.username %>:</h4>
 				<img src="<%= photo.url %>" width="400"> 
