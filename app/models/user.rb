@@ -53,7 +53,8 @@ class User < ActiveRecord::Base
   end
   
   def get_limited_feed_photos(feed_limit = 10)
-    self.feed_photos.order('created_at DESC').limit(feed_limit);
+    unsorted = self.feed_photos.order('created_at DESC').limit(feed_limit) + self.photos.order('created_at DESC').limit(feed_limit)
+    unsorted.sort.reverse[0..10];
   end
   
   def get_sorted_photos()

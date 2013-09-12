@@ -16,6 +16,7 @@
 		   var formImg = $("#submit_img");
 		   formImg.attr('value', newURL);
 		   console.log(newURL);
+		   featherEditor.close();
        },
        onError: function(errorObj) {
            alert(errorObj.message);
@@ -46,9 +47,10 @@
 	<br>
 	<a href="#" onclick="return launchEditor('imgPreview', previewUrl());">Edit Photo!</a>
 	<form action="<%= user_photos_url(current_user) %>" method="POST">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		<input type="hidden" name="photo[url]" id="submit_img" value="asdf">
 		<input type="hidden" name="photo[user_id]" value="<%=current_user.id%>">
-		<input type="submit" value="Upload Picture" onclick="console.log('click')">
+		<input type="submit" value="Upload Picture">
 	</form>
 </div>
 
@@ -58,7 +60,8 @@
 uploaded = function(event){	
 	var uploadDiv = $('#uploaderDiv').addClass('hidden');
 	var editDiv = $('#editorDiv').removeClass('hidden');
-	var imagePreview = $('#imgPreview').attr('src', event.fpfile.url);
+	$('#imgPreview').attr('src', event.fpfile.url);
+	
 }
 
 previewUrl = function(){

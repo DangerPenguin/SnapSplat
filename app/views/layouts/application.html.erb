@@ -7,22 +7,31 @@
   <%= filepicker_js_include_tag %>
   <%= csrf_meta_tags %>
 </head>
-<body class='container-fluid'>
+<body class='container-fluid' style="background-color: #2980b9;">
 	
 <!-- Nav Bar setup -->	
 <% if !current_user.nil? %>
 
 <!-- User bar -->
+<div class="outer-center">
+	<div class="inner-center">
+		<div class="inputbox">
+			Logged in as: <%= current_user.username %>
+			<%= button_to "Logout", session_url, :method => :delete %>
+		</div>
+	</div>
+</div>
+
 <div class="row">
 	<div class="span4" style="float: none; margin:0 auto;">
-		<div class="span2">Logged in as: <%= current_user.username %></div>
-		<div class="span1"><%= button_to "Logout", session_url, :method => :delete %></div>
+		<div class="span2"></div>
+		<div class="span1"><</div>
 	</div>
 </div>
 
 
-<div class="row">
-	<div class="span5" style="float: none; margin:0 auto;">
+<div class="row inputbox">
+	<div class="span5 " style="float: none; margin:0 auto;">
 		<div class="span1"><a href="<%= user_home_url(current_user) %>">HOME</a></div>
 		<div class="span1"><a href="<%= user_url(current_user.id)%>">PROFILE</a></div>
 		<div class="span1"><a href="<%= users_url %>">EXPLORE</a></div>
@@ -43,12 +52,14 @@
 </ul>
 <% end %>
 
+
 <!-- Load current page -->
-<div class="row">
-	<div class="span5" style="float: none; margin:0 auto;">
-	<%= yield %>
+<div class="outer-center">
+	<div class="inner-center">
+		<%= yield %>		
 	</div>
 </div>
+		
 
 </body>
 </html>

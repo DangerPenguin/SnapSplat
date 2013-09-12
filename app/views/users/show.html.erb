@@ -1,30 +1,39 @@
-<h1>USER <%= @user.username %>'s page!</h1>
+<div class="pagebox">
 
-<br>
+	<div id="user_feed">
+		<div class="inputbox">
+			<h1><%= @user.username %>'s page!</h1>
+			
+			<br>
+			
+			<% if(current_user.id != @user.id) %>
+				<% if(current_user.following.include?(@user)) %>
+					<button id="unfollowButton" onclick='unfollow("<%= current_user.id %>", 
+							"<%= current_user.following_join.where({:following_id => @user.id}).first().id%>")'>UNFOLLOW</button>
+				<% else %>
+					<button id="followButton" onclick='follow("<%= current_user.id %>", "<%= @user.id %>")'>FOLLOW</button>
+				<% end  %>
+				<br>
+			<% end %>
+			
+			<span style="text-align: left;"><h4>Tagline: </h4></span>
 
-<% if(current_user.id != @user.id) %>
-	<% if(current_user.following.include?(@user)) %>
-		<button id="unfollowButton" onclick='unfollow("<%= current_user.id %>", 
-				"<%= current_user.following_join.where({:following_id => @user.id}).first().id%>")'>UNFOLLOW</button>
-	<% else %>
-		<button id="followButton" onclick='follow("<%= current_user.id %>", "<%= @user.id %>")'>FOLLOW</button>
-	<% end  %>
-	<br>
-<% end %>
-<h4>Tagline: </h4>
+			<br>
 
-<br>
+			<span style="text-align: left;"><h4>Blurb: </h4></span>
 
-<h4>Blurb: </h4>
-
-<br>
-
-<h4>Photos: </h4>
-<ul>
-	<% @user.photos.each do |photo| %>
-	<li> <img src="<%= photo.url %>" width="400" onclick='$.modal( createModal( "<%= photo.url %>" ), { "overlayClose": true } );'> </li>	
-	<% end %>
-</ul>
+			<br>
+			
+			
+			<h4>Photos: </h4>
+			<% @user.photos.each do |photo| %>
+				<img style="display: block;" src="<%= photo.url %>" width="400" onclick='$.modal( createModal( "<%= photo.url %>" ), { "overlayClose": true } );'>	
+				<br>
+			<% end %>
+			
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
 

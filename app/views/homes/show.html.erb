@@ -1,34 +1,12 @@
-<!-- welcome bar -->
-<div class="row">
-	<div class="span5" style="float: none; margin:0 auto;">
-		<div class="span5"> <h1>Welcome, <%= current_user.username %></h1> </div>
-	</div>
-</div>
+<div class="pagebox">
 
-<!-- feed bar -->
-<div class="row">
-	<div class="span2" style="float: none; margin:0 auto;">
-		<div class="span2"> <h3>Feed:</h3> </div>
-	</div>
-</div>
-
-<!-- feed item -->
-<div class="row">
-	<div class="span2" style="float: none; margin:0 auto;">
-		<div class="span2"> <h3>Feed:</h3> </div>
-	</div>
-</div>
-
-
-
-
-<div id="user_feed">
-	<ul>
+	<div id="user_feed">
 		<% current_user.get_limited_feed_photos.each do |photo| %>
-		<li> 
-			<h4><%= photo.user.username %>:</h4>
-			<img src="<%= photo.url %>" width="400"> 
-		</li>
+			<div class="inputbox">
+				<h4><%= photo.user.username %>:</h4>
+				<img src="<%= photo.url %>" width="400"> 
+			</div>
+			<br>
 		<% end %>
-	</ul>
+	</div>
 </div>
