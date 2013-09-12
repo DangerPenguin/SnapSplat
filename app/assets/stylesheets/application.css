@@ -37,6 +37,7 @@ html, body, {height: 100%;}
 	float: right;
 	right: -50%;
 	position: relative;
+	text-align: center;
 }
 
 .inputbox{
@@ -45,10 +46,12 @@ html, body, {height: 100%;}
 	border-radius: 15px;
 	text-align: center;
 	padding: 10px;
+	
 }
 
 .pagebox{
 	background-color: #bdc3c7;
 	text-align: center;
 	padding: 20px;
+	min-width: 500px;
 }

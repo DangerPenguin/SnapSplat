@@ -1,8 +1,10 @@
 <br>
+<h1 >WELCOME TO SNAP SPLAT!</h1>
 <br>
 
 
-<div class="inputbox">
+
+<div class="inputbox" style="display:inline-block">
 	<h1>Sign In</h1>
 
 	<form action="<%= session_url %>" method="post">
@@ -27,5 +29,14 @@
 
 	  <input type="submit" value="Log in">
 	</form>
+</div>
+
+<br>
+<br>
+
+<div class="inputbox" style="display:inline-block">
+	<h1>Need an account?</h1>
+	<br>
+	<%= button_to "Create Account", new_user_url, :action => "new", :method => "get" %>
 </div>
 	

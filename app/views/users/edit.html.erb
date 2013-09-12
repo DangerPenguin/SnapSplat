@@ -1,0 +1,29 @@
+<br>
+
+<div class="inputbox">
+	
+	<h1>Edit Profile</h1>
+
+	<br>
+
+	<form action="<%= user_url(@user) %>" method="post">
+	  <input
+	     name="_method"
+	     type="hidden"
+	     value="PUT">
+	  <input
+	     name="authenticity_token"
+	     type="hidden"
+	     value="<%= form_authenticity_token %>">
+
+	  <label for="user_tagline">Tagline:</label>
+	  <input
+	     id="user_tagline"
+	     name="user[password]"
+	     type="text"
+		 value="">
+	  <br>
+
+	  <input type="submit" value="Update Profile">
+	</form>
+</div>
