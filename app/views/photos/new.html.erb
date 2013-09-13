@@ -73,6 +73,7 @@ uploaded = function(event){
 	var uploadDiv = $('#uploaderDiv').addClass('hidden');
 	var editDiv = $('#editorDiv').removeClass('hidden');
 	$('#imgPreview').attr('src', event.fpfile.url);
+	$('#submit_img').attr('value', event.fpfile.url)
 	
 }
 

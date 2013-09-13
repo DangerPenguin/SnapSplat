@@ -48,7 +48,7 @@ class UsersController < ApplicationController
       end
       
       format.json do
-        if @user.update_attributes(params[:user]) && @user.save
+        if @user.update_attributes(*params[:user]) && @user.save
           render :json => @user.photos.find_by_id( @user.profile_picture_id).url.to_json
         else
           render :json => "Failure"
