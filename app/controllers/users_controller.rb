@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_filter :require_current_user!, :only => [:show, :index, :edit, :update]
   before_filter :require_no_current_user!, :only => [:create, :new]
   
+  respond_to :html, :json
+  
   def create
     @user = User.new(params[:user])
     
@@ -36,11 +38,26 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     
-    if @user.update_attributes(params[:user]) && @user.save
-      redirect_to user_url(current_user)
-    else
-      redirect_to edit_user_url(current_user)
+    respond_to do |format|
+      format.html do
+        if @user.update_attributes(params[:user]) && @user.save
+          redirect_to user_url(current_user)
+        else
+          redirect_to edit_user_url(current_user)
+        end
+      end
+      
+      format.json do
+        if @user.update_attributes(params[:user]) && @user.save
+          render :json => @user.photos.find_by_id( @user.profile_picture_id).url.to_json
+        else
+          render :json => "Failure"
+        end
+      end
     end
+
+
+
     
   end
   

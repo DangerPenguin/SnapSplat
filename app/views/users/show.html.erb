@@ -1,8 +1,83 @@
+<script type="text/javascript">
+
+function createModal (url) {
+	return "<div><img src='" + url + "' width='700' class='simplemodal-close' ></div>";
+}
+
+function follow(user_id, id){
+	$.ajax({
+		url: "/users/" + user_id + "/follows/",
+		type: "POST",
+		data: {
+			'follow': {
+				'follower_id': user_id,
+				'following_id': id	
+			}
+		},
+		success: function(responseData){
+			$('#unfollowButton').attr('data-id', responseData.id);
+			
+			$('#unfollowButton').removeClass("hidden");
+			$('#followButton').addClass("hidden");
+			
+		},
+		failure: function(responsoData){
+		}
+	});
+}
+
+
+function unfollow(user_id){
+	var id = $('#unfollowButton').attr('data-id');
+	
+	$.ajax({
+		url: "/users/" + user_id + "/follows/" + id,
+		type: "DELETE",
+		success: function(responseData){
+			$('#unfollowButton').addClass("hidden");
+			$('#followButton').removeClass("hidden");
+		},
+		failure: function(responsoData){
+		}
+	});
+}
+
+function changeProfilePic(user_id, photo_id){
+	
+	$.ajax({
+		type: "PUT",
+		dataType: "json",
+		url: "/users/" + user_id,
+		data: {
+			'user': {
+				'profile_picture_id': photo_id
+			}
+		},
+		success: function(responseData){
+			$('#profilePic').attr('src', responseData);
+			alert('Profile Picture Changed');
+			
+		},
+		failure: function(responseData){
+		}
+	});
+}
+
+</script>
+
 <div class="pagebox">
 
 	<div id="user_feed">
 		<div class="inputbox" >
 			<h1><%= @user.username %>'s page!</h1>
+			
+			<img id="profilePic" 
+				<% if @user.profile_picture_id %>
+					src="<%= @user.photos.find_by_id( @user.profile_picture_id).url %>"  
+				<% else %>
+					src="<%= asset_path 'default_profile_pic.png' %>"  
+				<% end %>
+				onerror="this.src='<%= asset_path 'default_profile_pic.png' %>'" width="400">
 			
 			<br>
 			
@@ -45,6 +120,12 @@
 			<% @user.photos.each do |photo| %>
 				<img style="display: inline;" src="<%= photo.url %>" width="400" onclick='$.modal( createModal( "<%= photo.url %>" ), { "overlayClose": true } );'>	
 				<br>
+				<% if @user.id == current_user.id %>
+				
+				<button id="profile-button-<%= photo.id %>" onclick="changeProfilePic('<%= current_user.id %>', '<%= photo.id %>')">Make This Profile Picture</button>
+				<br>
+				<br>
+				<% end %>
 				<br>
 			<% end %>
 			
@@ -52,55 +133,3 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-
-function createModal (url) {
-	return "<div><img src='" + url + "' width='700' ></div>";
-}
-
-function follow(user_id, id){
-	$.ajax({
-		url: "/users/" + user_id + "/follows/",
-		type: "POST",
-		data: {
-			'follow': {
-				'follower_id': user_id,
-				'following_id': id	
-			}
-		},
-		success: function(responseData){
-			console.log("Success following!");
-			console.log(responseData);
-			$('#unfollowButton').attr('data-id', responseData.id);
-			
-			$('#unfollowButton').removeClass("hidden");
-			$('#followButton').addClass("hidden");
-			
-		},
-		failure: function(responsoData){
-			console.log("Failure following!");
-			console.log(responseData);
-		}
-	});
-}
-
-
-function unfollow(user_id){
-	var id = $('#unfollowButton').attr('data-id');
-	
-	$.ajax({
-		url: "/users/" + user_id + "/follows/" + id,
-		type: "DELETE",
-		success: function(responseData){
-			console.log("Success unfollowing!");
-			console.log(responseData);
-			$('#unfollowButton').addClass("hidden");
-			$('#followButton').removeClass("hidden");
-		},
-		failure: function(responsoData){
-			console.log("Failure unfollowing!");
-			console.log(responseData);
-		}
-	});
-}
-</script>

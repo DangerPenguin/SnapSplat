@@ -13,7 +13,16 @@
 			<div class="inputbox" style="display: inline-block">
 				<a href="<%= user_url(user) %>"><%=user.username%></a>
 				<br>
-				<a href="<%= user_url(user) %>"><img src="<%= user.get_last_photo_url %>" style="height: 75px"></a>
+				<a href="<%= user_url(user) %>">
+					
+					<img
+					<% if user.profile_picture_id %>
+						src="<%= user.photos.find_by_id( user.profile_picture_id).url %>"  
+					<% else %>
+						src="<%= asset_path 'default_profile_pic.png' %>"  
+					<% end %>
+					onerror="this.src='<%= asset_path 'default_profile_pic.png' %>'" 
+					style="height: 75px"></a>
 				
 			</div>
 			
