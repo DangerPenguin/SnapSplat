@@ -30,11 +30,18 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find_by_id(params[:id])
+    @user = current_user
   end
   
   def update
-    @user = User.find_by_id(params[:id])
+    @user = current_user
+    
+    if @user.update_attributes(params[:user]) && @user.save
+      redirect_to user_url(current_user)
+    else
+      redirect_to edit_user_url(current_user)
+    end
+    
   end
   
 end

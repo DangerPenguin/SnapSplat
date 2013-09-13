@@ -8,14 +8,21 @@
 		
 		<br>
 		
-		<% @users.each do |user| %>
+		<% @users.each_with_index do |user, index| %>
 			<% next if(user.id == current_user.id)%>
-			<div class="inputbox" style="display: inline">
+			<div class="inputbox" style="display: inline-block">
 				<a href="<%= user_url(user) %>"><%=user.username%></a>
-				<img src="">
+				<br>
+				<a href="<%= user_url(user) %>"><img src="<%= user.get_last_photo_url %>" style="height: 75px"></a>
+				
 			</div>
 			
 			&nbsp
+			
+			<% if(index > 0 && index % 4 == 0) %>
+				<br>
+				<br>
+			<% end %>
 			
 		<% end %>
 	</div>

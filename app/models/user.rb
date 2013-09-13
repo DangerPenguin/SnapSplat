@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :password
+  attr_accessible :username, :password, :tagline, :blurb
   attr_reader :password
   
   validates :password_digest, :presence => { :message => "Password can't be blank" }
@@ -50,6 +50,11 @@ class User < ActiveRecord::Base
   
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
+  end
+  
+  def get_last_photo_url
+    return self.photos.order('created_at DESC').first.url if self.photos.length > 0
+    ""
   end
   
   def get_limited_feed_photos(feed_limit = 10)

@@ -25,14 +25,19 @@
 						>FOLLOW</button>
 				
 				<br>
+			<% else  %>
+				<a href="<%= edit_user_url(current_user) %>">
+					<button  >Edit Profile</button></a>
+				
 			<% end %>
 			
-			<span style="text-align: left;"><h4>Tagline: </h4></span>
+				<span style="text-align: left;"><h4>Tagline: </h4></span>
+			<p style="width: 400px; word-wrap:normal"><%= @user.tagline %></p>
 
 			<br>
 
 			<span style="text-align: left;"><h4>Blurb: </h4></span>
-
+			<p style="width: 400px; word-wrap:normal" ><%= @user.blurb %></p>
 			<br>
 			
 			

@@ -19,9 +19,20 @@
 	  <label for="user_tagline">Tagline:</label>
 	  <input
 	     id="user_tagline"
-	     name="user[password]"
+	     name="user[tagline]"
 	     type="text"
 		 value="<%= @user.tagline %>">
+	  <br>
+	  
+	  <label for="user_tagline">Blurb:</label>
+	  <textarea
+	  	id="user_blurb"
+		name="user[blurb]"
+		columns=40
+		rows=10
+		style="min-width: 300px;"
+		><%= @user.blurb %></textarea>
+
 	  <br>
 
 	  <input type="submit" value="Update Profile">

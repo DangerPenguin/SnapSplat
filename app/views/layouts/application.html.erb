@@ -48,11 +48,11 @@
 
 <!-- Error/Notices flash -->
 <% if flash.now[:notice] %>
-<ul>
-<% flash.now[:notice].each do |notice| %>
-	<li><%= notice %></li>
-<% end %>
-</ul>
+
+		<% flash.now[:notice].each do |notice| %>
+			<h4 style="color: red;"><%= notice%></h4>
+		<% end %>
+
 <% end %>
 
 
