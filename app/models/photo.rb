@@ -4,6 +4,8 @@ class Photo < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :url, :presence => true
   
+  paginates_per 5
+  
   belongs_to(:user,
   :class_name => "User",
   :primary_key => :id,

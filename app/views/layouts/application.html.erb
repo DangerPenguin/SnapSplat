@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SnapSplat</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= filepicker_js_include_tag %>
   <%= csrf_meta_tags %>
 </head>
-<body class='container-fluid' style="background-color: #2980b9;">
+<body style="background-color: #2980b9;">
 	
 <!-- Nav Bar setup -->	
-<% if !current_user.nil? %>
+<% if current_user %>
 
-<!-- User bar -->
-<div class="outer-center">
-	<div class="inner-center">
-		<div class="inputbox">
-			Logged in as: <%= current_user.username %>
-						
-			<form action="<%= session_url %>" class="button_to" method="post" style="display: inline;">
-					<input name="_method" type="hidden" value="delete">
-					<input style="display:inline;" type="submit" value="Logout">
-					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-			</form>
-		</div>
-	</div>
-</div>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="<%= user_url(current_user) %>">SnapSplat: <%= current_user.username %></a>
+  </div>
 
-<div class="row">
-	<div class="span4" style="float: none; margin:0 auto;">
-		<div class="span2"></div>
-		<div class="span1"><</div>
-	</div>
-</div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li><a href="<%= user_home_url(current_user) %>">Home</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Profile <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          	<li><a href="<%= user_url(current_user) %>">View My Profile</a></li>
+			<li><a href="<%= edit_user_url(current_user) %>">Edit My Profile</a></li>
+        </ul>
+      </li>
+	  <li><a href="<%= users_url %>">Browse Users</a></li>
+	  <li><a href="<%= new_user_photo_url(current_user) %>">Upload Photo</a></li>
+    </ul>
 
+    <ul class="nav navbar-nav navbar-right">
+	    <form class="navbar-form navbar-right" action="<%= session_url %>" method="POST">
+			<input type="hidden" name="_method" value="DELETE">
+	      <button type="submit" class="btn btn-default">Logout</button>
+	    </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
 
-<div class="row inputbox">
-	<div class="span5 " style="float: none; margin:0 auto;">
-		<div class="span1"><a href="<%= user_home_url(current_user) %>">HOME</a></div>
-		<div class="span1"><a href="<%= user_url(current_user.id)%>">PROFILE</a></div>
-		<div class="span1"><a href="<%= users_url %>">EXPLORE</a></div>
-		<div class="span1"><a href="<%= new_user_photo_url(current_user) %>">UPLOAD</a></div>
-
-	</div>
-</div>
 <% end %>
 
 <!-- Error/Notices flash -->

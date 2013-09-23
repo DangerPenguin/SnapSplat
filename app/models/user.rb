@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   validates :session_token, :presence => true
   validates :username, :presence => true
   
+  paginates_per 10
+  
   after_initialize :ensure_session_token
  
  #photos 

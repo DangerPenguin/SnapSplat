@@ -10,9 +10,5 @@ This project was meant to show severeal things, that I can do
 #TODO
 
 - finish using bootstrap
-- add user edit profile page
-- add user profile pictures
-- explore/browser by newest uploaded photo, not just name 
-
-
-
+- add 'likes'
+- POSSIBLY comments

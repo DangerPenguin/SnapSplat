@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   def show
     if params.include?(:id)
       @user = User.find(params[:id])
+      @photos = @user.photos.order('created_at DESC').page params[:page]
     else
       redirect_to user_url(current_user)
     end

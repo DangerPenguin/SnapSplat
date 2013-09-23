@@ -11,11 +11,25 @@
        tools: 'enhance,effects,crop,resize,orientation,focus,brightness,contrast,saturation,warmth,sharpness,colorsplash,redeye,whiten,blemish',
        appendTo: '',
        onSave: function(imageID, newURL) {
-           var img = document.getElementById(imageID);
-           img.src = newURL;
-		   var formImg = $("#submit_img");
-		   formImg.attr('value', newURL);
-		   console.log(newURL);
+		   
+		   filepicker.storeUrl(
+			   newURL,
+			   {},
+			   function(inkBlob){
+				   //success
+		           var img = document.getElementById(imageID);
+		           img.src = newURL;
+				   var formImg = $("#submit_img");
+				   formImg.attr('value', inkBlob.url);
+				   console.log(inkBlob.url);
+			   },
+			   function(inkBlob){
+				   //error
+				   alert('error uploading')
+			   }
+		   );
+		   
+		   
 		   featherEditor.close();
        },
        onError: function(errorObj) {

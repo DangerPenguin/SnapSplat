@@ -36,6 +36,8 @@ function unfollow(user_id){
 		success: function(responseData){
 			$('#unfollowButton').addClass("hidden");
 			$('#followButton').removeClass("hidden");
+			var followers = $('#follower_count').innerHTML;
+			console.log($('#follower_count')	);
 		},
 		failure: function(responsoData){
 		}
@@ -70,18 +72,31 @@ function changeProfilePic(user_id, photo_id){
 		<div class="inputbox" >
 			<h1><%= @user.username %>'s page!</h1>
 			
+			<div>
+			
 			<img id="profilePic" 
 				<% if @user.profile_picture_id %>
 					src="<%= @user.photos.find_by_id( @user.profile_picture_id).url %>"  
 				<% else %>
 					src="<%= asset_path 'default_profile_pic.png' %>"  
 				<% end %>
-				onerror="this.src='<%= asset_path 'default_profile_pic.png' %>'" width="400">
+				onerror="this.src='<%= asset_path 'default_profile_pic.png' %>'" 
+				style="max-height: 250px; max-width: 250px; display:inline; margin-left: 10%">
+				
+				<div style='display: inline; float: right; margin-right: 10%'>
+					<p style="display: inline">Snaps:<span id="snap_count"><%= @user.photos.length %></span></p>
+					<br>
+					<p style="display: inline">Followers:<span id="follower_count"><%= @user.followers.length %></span></p>
+					<br>
+					<p style="display: inline">Following:<span id="following_count"><%= @user.following.length %></span></p>
+				</div>
+				
+			
+			</div>
 			
 			<br>
-			
 			<% if(current_user.id != @user.id) %>
-				
+		
 					<button id="unfollowButton" onclick="unfollow('<%= current_user.id %>')" 	
 						<% unless(current_user.following.include?(@user)) %>
 							class="hidden"
@@ -90,20 +105,21 @@ function changeProfilePic(user_id, photo_id){
 							data-id="<%= current_user.following_join.where({:following_id => @user.id }).first.id %>"
 						<% end  %>
 						>UNFOLLOW</button>
-				
+		
 					<button id="followButton" onclick='follow("<%= current_user.id %>", "<%= @user.id %>")'
 						<% if(current_user.following.include?(@user)) %>
 							class="hidden"
 						<% end  %>
-						
-						>FOLLOW</button>
 				
+						>FOLLOW</button>
+		
 				<br>
 			<% else  %>
 				<a href="<%= edit_user_url(current_user) %>">
 					<button  >Edit Profile</button></a>
-				
+		
 			<% end %>
+
 			
 				<span style="text-align: left;"><h4>Tagline: </h4></span>
 			<p style="width: 400px; word-wrap:normal"><%= @user.tagline %></p>
@@ -116,7 +132,21 @@ function changeProfilePic(user_id, photo_id){
 			
 			
 			<h4>Photos: </h4>
-			<% @user.photos.each do |photo| %>
+			
+			<!-- <ul class="pager">  
+			  <li class="previous">  
+			    <a href="#">← Older</a>  
+			  </li>  
+			  <li class="next">  
+			    <a href="#">Newer →</a>  
+			  </li>  
+			</ul>  -->
+			
+			<%= paginate @photos %>
+			
+			<br/>
+			
+			<% @photos.each do |photo| %>
 				<img style="display: inline;" src="<%= photo.url %>" width="400" onclick='$.modal( createModal( "<%= photo.url %>" ), { "overlayClose": true } );'>	
 				<br>
 				<% if @user.id == current_user.id %>
@@ -127,6 +157,8 @@ function changeProfilePic(user_id, photo_id){
 				<% end %>
 				<br>
 			<% end %>
+		
+			<%= paginate @photos %>
 			
 		</div>
 	</div>
