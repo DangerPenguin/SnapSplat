@@ -1,5 +1,5 @@
 <!-- Load editor widget code! -->
-<script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
+<!-- <script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script> -->
 
 
 <!-- Instantiate Feather -->
@@ -9,7 +9,7 @@
        apiVersion: 3,
        theme: 'dark', // Check out our new 'light' and 'dark' themes!
        tools: 'enhance,effects,crop,resize,orientation,focus,brightness,contrast,saturation,warmth,sharpness,colorsplash,redeye,whiten,blemish',
-       appendTo: '',
+       appendTo: 'editDiv',
        onSave: function(imageID, newURL) {
 		   
 		   filepicker.storeUrl(
@@ -79,6 +79,10 @@
 		</div>
 	
 	</div>
+</div>
+
+<div id="editDiv" style="zoom: 0.5; user-scalable: yes;">
+	
 </div>
 
 
