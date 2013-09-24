@@ -75,7 +75,7 @@ function changeProfilePic(user_id, photo_id){
 			<div>
 			
 			<img id="profilePic" 
-				<% if @user.profile_picture_id %>
+				<% if @user.profile_picture_id && @user.profile_picture.url %>
 					src="<%= @user.photos.find_by_id( @user.profile_picture_id).url %>"  
 				<% else %>
 					src="<%= asset_path 'default_profile_pic.png' %>"  
