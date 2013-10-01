@@ -1,5 +1,5 @@
-<div class="pagebox">
-	<div id="banner" class="inputbox">
+<div class="inputbox">
+	<div id="banner">
 		<h1>New Snaps:</h1>
 	</div>
 	
@@ -12,14 +12,16 @@
 		<% if photos.length > 0 %>
 		
 			<% photos.each do |photo| %>
-				<div class="inputbox">
+				<div>
+					<hr class="rule">
 					<h4><%= photo.user.username %>:</h4>
 					<img src="<%= photo.url %>" width="400"> 
 				</div>
 				<br>
 			<% end %>
 		<% else %>
-			<div class="inputbox">
+			<div>
+				<hr class="rule">
 				<h4>No snaps to view, you should </h4>
 				<a href="<%= users_url %>" ><h4>browse users to follow!</h4></a>
 			</div>

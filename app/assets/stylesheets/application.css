@@ -46,6 +46,7 @@ html, body, {height: 100%;}
 	border-radius: 15px;
 	text-align: center;
 	padding: 10px;
+	min-width: 500px;
 	
 }
 
@@ -54,4 +55,9 @@ html, body, {height: 100%;}
 	text-align: center;
 	padding: 20px;
 	min-width: 500px;
+}
+
+.rule{
+	border-color: #555555;
+	width: 90%;
 }

@@ -1,16 +1,16 @@
 
-<div class="pagebox">
+<div class="inputbox">
 
 	<div id="users" >		
-		<div class="inputbox">
+		<div>
 			<h1> Explore Users:  </h1>
 		</div>
-		
+		<hr class="rule">
 		<br>
 		
 		<% @users.each_with_index do |user, index| %>
 			<% next if(user.id == current_user.id)%>
-			<div class="inputbox" style="display: inline-block">
+			<div style="display: inline-block">
 				<a href="<%= user_url(user) %>"><%=user.username%></a>
 				<br>
 				<a href="<%= user_url(user) %>">
